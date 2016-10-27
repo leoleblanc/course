@@ -28,7 +28,7 @@ public class BPlusTree {
   public static final String FILENAME_EXTENSION = ".index";
 
   protected PageAllocator allocator;
-  protected DataType keySchema; 
+  protected DataType keySchema;
   private int rootPageNum;
   private int firstLeafPageNum;
 
@@ -40,7 +40,7 @@ public class BPlusTree {
    */
 
   public BPlusTree(DataType keySchema, String fName) {
-    this(keySchema, fName, FILENAME_PREFIX); 
+    this(keySchema, fName, FILENAME_PREFIX);
   }
 
   public BPlusTree(DataType keySchema, String fName, String filePrefix) {
@@ -49,7 +49,7 @@ public class BPlusTree {
     this.keySchema = keySchema;
     int headerPageNum = this.allocator.allocPage();
     assert(headerPageNum == 0);
-    BPlusNode root = new LeafNode(this);  
+    BPlusNode root = new LeafNode(this);
     this.rootPageNum = root.getPageNum();
     this.firstLeafPageNum = rootPageNum;
     writeHeader();
@@ -79,7 +79,7 @@ public class BPlusTree {
 
   public Iterator<RecordID> sortedScan() {
     LeafNode firstLeaf = new LeafNode(this, firstLeafPageNum);
-    return new BPlusIterator(firstLeaf); 
+    return new BPlusIterator(firstLeaf);
   }
 
   /**
@@ -92,21 +92,21 @@ public class BPlusTree {
   public Iterator<RecordID> sortedScanFrom(DataType keyStart) {
     BPlusNode root = BPlusNode.getBPlusNode(this, rootPageNum);
     LeafNode leaf = root.locateLeaf(keyStart, true);
-  
-    return new BPlusIterator(leaf, keyStart, true); 
+
+    return new BPlusIterator(leaf, keyStart, true);
   }
 
   /**
    * Performs a lookup in the index that matches an exact key.
    *
    * @param key the value of the exact key match.
-   * @return Iterator of RecordIDs that match an exact key. 
+   * @return Iterator of RecordIDs that match an exact key.
    */
 
   public Iterator<RecordID> lookupKey(DataType key) {
     BPlusNode root = BPlusNode.getBPlusNode(this, rootPageNum);
     LeafNode leaf = root.locateLeaf(key, true);
-    return new BPlusIterator(leaf, key, false); 
+    return new BPlusIterator(leaf, key, false);
   }
 
   /**
@@ -117,9 +117,9 @@ public class BPlusTree {
    */
 
   public void insertKey(DataType key, RecordID rid) {
-    BPlusNode.getBPlusNode(this, rootPageNum).insertKey(key, rid); 
+    BPlusNode.getBPlusNode(this, rootPageNum).insertKey(key, rid);
   }
-  
+
   /**
    * Deletes an entry with the matching Key and RecordID
    *
@@ -142,7 +142,11 @@ public class BPlusTree {
   public boolean containsKey(DataType key) {
     return lookupKey(key).hasNext();
   }
- 
+
+  public int getNumPages() {
+    return this.allocator.getNumPages();
+  }
+
   /**
    * Updates where the root page is. Should be called whenever the root node has been split
    *
@@ -158,16 +162,16 @@ public class BPlusTree {
   private void writeHeader() {
     Page headerPage = allocator.fetchPage(0);
     int bytesWritten = 0;
-    
+
     headerPage.writeInt(bytesWritten, this.rootPageNum);
     bytesWritten += 4;
-   
+
     headerPage.writeInt(bytesWritten, this.firstLeafPageNum);
     bytesWritten += 4;
 
     headerPage.writeInt(bytesWritten, keySchema.type().ordinal());
     bytesWritten += 4;
-    
+
     if (this.keySchema.type().equals(DataType.Types.STRING)) {
       headerPage.writeInt(bytesWritten, this.keySchema.getSize());
       bytesWritten += 4;
@@ -177,19 +181,19 @@ public class BPlusTree {
 
   private void readHeader() {
     Page headerPage = allocator.fetchPage(0);
-    
+
     int bytesRead = 0;
-    
+
     this.rootPageNum = headerPage.readInt(bytesRead);
     bytesRead += 4;
-   
+
     this.firstLeafPageNum = headerPage.readInt(bytesRead);
     bytesRead += 4;
 
     int keyOrd = headerPage.readInt(bytesRead);
     bytesRead += 4;
     DataType.Types type = DataType.Types.values()[keyOrd];
-    
+
     switch(type) {
     case INT:
       this.keySchema = new IntDataType();
@@ -207,14 +211,14 @@ public class BPlusTree {
       break;
     }
   }
-  
+
   /**
    * An implementation of Iterator that provides an iterator interface over RecordIDs
    * in this index.
    */
-  
+
   private class BPlusIterator implements Iterator<RecordID> {
-    private LeafNode currLeaf; 
+    private LeafNode currLeaf;
     private Iterator<RecordID> currLeafIter;
     private DataType lookupKey = null;
     private boolean isScan;
@@ -224,11 +228,11 @@ public class BPlusTree {
    *
    * @param leaf the LeafNode to start scanning from.
    */
-  
+
     public BPlusIterator(LeafNode leaf) {
       //TODO: Implement Me!
     }
-   
+
   /**
    * This constructor creates an Iterator that scans starting from some LeafNode and some starting value.
    * Can be used for LookupKey or sortedScanFrom via a boolean toggle.
@@ -246,7 +250,7 @@ public class BPlusTree {
       //TODO: Implement Me!
       return false;
     }
-    
+
     /**
      * Yields the next RecordID of this iterator.
      *
