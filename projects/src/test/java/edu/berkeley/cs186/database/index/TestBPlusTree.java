@@ -10,6 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
+import org.junit.rules.Timeout;
 import org.junit.runners.MethodSorters;
 import org.junit.experimental.categories.Category;
 
@@ -26,6 +27,9 @@ public class TestBPlusTree {
 
   @Rule
   public TemporaryFolder tempFolder = new TemporaryFolder();
+  
+  @Rule
+  public Timeout globalTimeout = Timeout.seconds(80); // 80 seconds max per method tested
 
   @Before
   public void beforeEach() throws Exception {
@@ -356,7 +360,6 @@ public class TestBPlusTree {
     for (int i = 0; i < innerNodeSplit*intLeafPageSize - 1; i++) {
       assertTrue(rids.hasNext());
       RecordID rid = rids.next();
-      //System.out.println(rid.getPageNum());
       assertTrue("iteration: " + i + " last: " + last + " curr: " + rid.getPageNum(), last <= rid.getPageNum());
       last = rid.getPageNum();
     }

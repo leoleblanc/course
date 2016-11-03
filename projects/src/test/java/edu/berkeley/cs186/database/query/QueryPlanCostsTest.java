@@ -24,6 +24,7 @@ import edu.berkeley.cs186.database.table.Schema;
 import edu.berkeley.cs186.database.query.QueryPlan.PredicateOperator;
 import edu.berkeley.cs186.database.table.stats.StringHistogram;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 
 import static org.junit.Assert.*;
 

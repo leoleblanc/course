@@ -17,6 +17,7 @@ import edu.berkeley.cs186.database.Database;
 import edu.berkeley.cs186.database.DatabaseException;
 import edu.berkeley.cs186.database.TestUtils;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 import edu.berkeley.cs186.database.datatypes.BoolDataType;
 import edu.berkeley.cs186.database.datatypes.DataType;
 import edu.berkeley.cs186.database.datatypes.FloatDataType;

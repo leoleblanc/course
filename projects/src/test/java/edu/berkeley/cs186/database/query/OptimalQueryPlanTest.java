@@ -17,6 +17,7 @@ import edu.berkeley.cs186.database.Database;
 import edu.berkeley.cs186.database.DatabaseException;
 import edu.berkeley.cs186.database.TestUtils;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 import edu.berkeley.cs186.database.datatypes.BoolDataType;
 import edu.berkeley.cs186.database.datatypes.DataType;
 import edu.berkeley.cs186.database.datatypes.FloatDataType;
@@ -70,6 +71,15 @@ public class OptimalQueryPlanTest {
     }
 
     transaction.end();
+  }
+
+  /**
+   * Test sample, do not modify.
+   */
+  @Test
+  @Category(StudentTestP2.class)
+  public void testSample() {
+    assertEquals(true, true); // Do not actually write a test like this!
   }
 
   @Test(timeout=1000)

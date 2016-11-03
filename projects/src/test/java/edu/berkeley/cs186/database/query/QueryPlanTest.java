@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.Timeout;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import edu.berkeley.cs186.database.Database;
 import edu.berkeley.cs186.database.DatabaseException;
 import edu.berkeley.cs186.database.TestUtils;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 import edu.berkeley.cs186.database.datatypes.BoolDataType;
 import edu.berkeley.cs186.database.datatypes.DataType;
 import edu.berkeley.cs186.database.datatypes.FloatDataType;
@@ -38,6 +40,9 @@ public class QueryPlanTest {
 
   @Rule
   public TemporaryFolder tempFolder = new TemporaryFolder();
+  
+  @Rule
+  public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
   @Before
   public void setUp() throws DatabaseException, IOException {

@@ -182,16 +182,16 @@ To encourage you to try to find interesting edge cases, we're going to give you 
 
 In the `src/test` directory you'll notice we've included several tests for you already. You should take a look at these to get a sense of how to write tests. You should write your tests in one of the existing files according to the functionality you're trying to test.
 
-All test methods you write should have both the `@Test` and `@Category(StudentTest.class)` annotations. We have included an example test in the `TestTable` class:
+All test methods you write should have both the `@Test` and `@Category(StudentTestP2.class)` annotations. Note that this is different from the `@Category(StudentTest.class)` annotation you used in Project 1! This is important in making sure that your Project 2 tests are not mixed up with your Project 1 tests. We have included an example test in the `OptimalQueryPlanTest` class:
 ```
 @Test
-@Category(StudentTest.class)
+@Category(StudentTestP2.class)
 public void testSample() {
   assertEquals(true, true); // Do not actually write a test like this!
 }
 ```
 
-Then whenever you run `mvn test`, your test will be run as well.
+Then whenever you run `mvn test`, your test will be run as well. To run only the tests that you wrote for this project, you may run `mvn test -Dtest=StudentTestSuiteP2`. You now also have the ability to run only the tests in a specific package. For example, you may run `mvn test -Dtest="edu.berkeley.cs186.database.query.*"` to run all of the tests in the `query` package. This may be helpful for debugging to save you time from running the whole test suite.
 
 ### Part 4: Feedback
 

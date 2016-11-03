@@ -16,6 +16,7 @@ import org.junit.runners.MethodSorters;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.Timeout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,9 @@ public class TestTable {
 
   @Rule
   public TemporaryFolder tempFolder = new TemporaryFolder();
+
+  @Rule
+  public Timeout globalTimeout = Timeout.seconds(10); // 10 seconds max per method tested
 
   @Before
   public void beforeEach() throws Exception {

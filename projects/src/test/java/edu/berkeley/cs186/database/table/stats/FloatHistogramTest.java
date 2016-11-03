@@ -1,6 +1,7 @@
 package edu.berkeley.cs186.database.table.stats;
 
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

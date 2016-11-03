@@ -5,6 +5,7 @@ import org.junit.experimental.categories.Category;
 
 import edu.berkeley.cs186.database.TestUtils;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 import edu.berkeley.cs186.database.table.Schema;
 import static org.junit.Assert.*;
 

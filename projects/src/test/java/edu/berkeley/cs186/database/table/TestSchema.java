@@ -8,6 +8,8 @@ import edu.berkeley.cs186.database.datatypes.StringDataType;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.Timeout;
+import org.junit.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class TestSchema {
+  
+  @Rule
+  public Timeout globalTimeout = Timeout.seconds(1); // 10 seconds max per method tested
+  
   @Test
   public void testSchemaRetrieve() {
     Schema schema = TestUtils.createSchemaWithAllTypes();

@@ -15,6 +15,7 @@ import java.util.List;
 import edu.berkeley.cs186.database.DatabaseException;
 import edu.berkeley.cs186.database.TestUtils;
 import edu.berkeley.cs186.database.StudentTest;
+import edu.berkeley.cs186.database.StudentTestP2;
 import edu.berkeley.cs186.database.datatypes.BoolDataType;
 import edu.berkeley.cs186.database.datatypes.DataType;
 import edu.berkeley.cs186.database.datatypes.FloatDataType;
@@ -243,7 +244,7 @@ public class JoinOperatorTest {
     assertEquals(1000*1000, numRecords);
   }
 
-  @Test(timeout=5000)
+  @Test(timeout=10000)
   public void testSimpleJoinBNLJMultiplePages() throws QueryPlanException, DatabaseException, IOException {
     TestSourceOperator sourceOperator = new TestSourceOperator(2000);
     File tempDir = tempFolder.newFolder("joinTest");
